@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Конкретная новость</title>
+</head>
+<body>
+    {% extends 'default.html' %}
+    {% load custom_filters %}
+    {%  block content %}
+    <h1> {{ post.post_title|censor }} </h1>
+    <hr>
+    <b>Автор новости:</b>  {{ post.post_author.author }}
+    <hr>
+    <b>Дата создания новости:</b>  {{ post.post_datetime_create }}
+    <hr>
+    <b>Категория:</b>
+    {% for cat in post.post_category.all %}
+    {{ cat.category_title }}
+    {% endfor %}
+    <hr>
+    <b>Текст новости:</b>  {{ post.post_text }}
+    <hr>
+    <b>Рейтинг новости:</b>  {{ post.post_rating }}
+    <hr>
+    {% endblock content%}
+</body>
+</html>

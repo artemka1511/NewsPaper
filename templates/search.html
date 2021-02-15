@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Поиск новости </title>
+</head>
+<body>
+    {% extends 'default.html' %}
+    {% load custom_filters %}
+    {%  block content %}
+    <br>
+<!-- Перед таблицей добавим форму для поиска -->
+<form method="GET">
+    {{ filter.form }} <!-- Форму от фильтров за нас сделает django. А вот кнопку, увы придётся делать самому -->
+    <input type="submit" value="Найти">
+</form>
+
+<table>
+    <thead>
+        <th>
+            Название статьи:
+        </th>
+        <th>
+            Дата создания статьи:
+        </th>
+        <th>
+            Имя автора:
+        </th>
+    </thead>
+    {% for post in filter.qs %}
+    <tr>
+        <td>
+            {{ post.post_title|censor }}
+        </td>
+        <td>
+            {{ post.post_datetime_create|date:'M d Y' }}
+        </td>
+        <td>
+            {{ post.post_author }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+    {% endblock content%}
+</body>
+</html>

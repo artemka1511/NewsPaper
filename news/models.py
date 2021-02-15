@@ -15,11 +15,11 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    post_author = models.ForeignKey('accounts.Author', on_delete=models.CASCADE)
+    post_author = models.ForeignKey('accounts.Author', on_delete=models.CASCADE, verbose_name='Имя автора')
     post_choice = models.CharField(max_length=2, choices=TYPE_NEWS, default=article)
-    post_datetime_create = models.DateTimeField(auto_now_add=True)
+    post_datetime_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания статьи')
     post_category = models.ManyToManyField(Category, through='PostCategory')
-    post_title = models.CharField(max_length=60, unique=True)
+    post_title = models.CharField(max_length=60, unique=True, verbose_name='Название статьи')
     post_text = models.TextField()
     post_rating = models.IntegerField(default=0)
 
